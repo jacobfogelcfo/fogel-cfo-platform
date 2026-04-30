@@ -39,6 +39,14 @@ export default {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
+        warning: {
+          DEFAULT: "hsl(var(--warning))",
+          foreground: "hsl(var(--warning-foreground))",
+        },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
@@ -84,6 +92,17 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      fontFamily: {
+        display: ['"Manrope"', '"Heebo"', '"Inter"', "system-ui", "sans-serif"],
+        sans: ['"Inter"', '"Heebo"', "system-ui", "sans-serif"],
+      },
+      boxShadow: {
+        "fc-1": "var(--shadow-fc-1)",
+        "fc-2": "var(--shadow-fc-2)",
+      },
+      backgroundImage: {
+        "gradient-primary": "var(--gradient-primary)",
       },
     },
   },
