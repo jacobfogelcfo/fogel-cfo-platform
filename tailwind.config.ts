@@ -93,6 +93,17 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      fontFamily: {
+        display: ['"Manrope"', '"Heebo"', '"Inter"', "system-ui", "sans-serif"],
+        sans: ['"Inter"', '"Heebo"', "system-ui", "sans-serif"],
+      },
+      boxShadow: {
+        "fc-1": "var(--shadow-fc-1)",
+        "fc-2": "var(--shadow-fc-2)",
+      },
+      backgroundImage: {
+        "gradient-primary": "var(--gradient-primary)",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
