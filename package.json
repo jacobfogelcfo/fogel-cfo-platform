@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "seed": "tsx supabase/seed.ts && psql \"$DATABASE_URL\" -f supabase/seed.sql"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
