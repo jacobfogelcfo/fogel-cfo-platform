@@ -4,6 +4,7 @@
 import { useClient } from "@/contexts/ClientContext";
 import { useUserRole } from "@/contexts/UserRoleContext";
 import { useClientConfig } from "@/hooks/useClientConfig";
+import { Button } from "@/components/ui/button";
 
 const ROLE_LABELS: Record<string, string> = {
   super_admin: "Super Admin",
