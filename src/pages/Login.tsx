@@ -13,6 +13,21 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
+  const [devPassword, setDevPassword] = useState("");
+  const [devSubmitting, setDevSubmitting] = useState(false);
+
+  async function handleDevPassword(e: React.FormEvent) {
+    e.preventDefault();
+    const { supabase } = await import("@/lib/supabase");
+    setDevSubmitting(true);
+    const { error } = await supabase.auth.signInWithPassword({
+      email: email.trim(),
+      password: devPassword,
+    });
+    setDevSubmitting(false);
+    if (error) toast.error(error.message);
+    else toast.success("Signed in.");
+  }
 
   useEffect(() => {
     document.title = "Sign in · Fogel CFO";
@@ -125,6 +140,31 @@ export default function Login() {
             <p className="mt-4 text-center text-xs text-muted-foreground">
               Click the link in your email to finish signing in.
             </p>
+          )}
+
+          {import.meta.env.DEV && (
+            <form onSubmit={handleDevPassword} className="mt-6 space-y-3 border-t pt-4">
+              <p className="text-xs font-medium text-muted-foreground">Dev sign-in (password)</p>
+              <div className="space-y-1.5">
+                <Label htmlFor="dev-password">Password</Label>
+                <Input
+                  id="dev-password"
+                  type="password"
+                  autoComplete="current-password"
+                  value={devPassword}
+                  onChange={(e) => setDevPassword(e.target.value)}
+                  disabled={devSubmitting || !isSupabaseConfigured}
+                />
+              </div>
+              <Button
+                type="submit"
+                variant="secondary"
+                className="w-full"
+                disabled={devSubmitting || !email || !devPassword || !isSupabaseConfigured}
+              >
+                Sign in
+              </Button>
+            </form>
           )}
         </div>
 
