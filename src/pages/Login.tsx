@@ -141,6 +141,31 @@ export default function Login() {
               Click the link in your email to finish signing in.
             </p>
           )}
+
+          {import.meta.env.DEV && (
+            <form onSubmit={handleDevPassword} className="mt-6 space-y-3 border-t pt-4">
+              <p className="text-xs font-medium text-muted-foreground">Dev sign-in (password)</p>
+              <div className="space-y-1.5">
+                <Label htmlFor="dev-password">Password</Label>
+                <Input
+                  id="dev-password"
+                  type="password"
+                  autoComplete="current-password"
+                  value={devPassword}
+                  onChange={(e) => setDevPassword(e.target.value)}
+                  disabled={devSubmitting || !isSupabaseConfigured}
+                />
+              </div>
+              <Button
+                type="submit"
+                variant="secondary"
+                className="w-full"
+                disabled={devSubmitting || !email || !devPassword || !isSupabaseConfigured}
+              >
+                Sign in
+              </Button>
+            </form>
+          )}
         </div>
 
         <p className="mt-6 text-center text-xs text-muted-foreground">
