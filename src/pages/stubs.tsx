@@ -68,6 +68,31 @@ function StubShell({
 }
 
 export function DashboardPage() {
+  const { clients } = useClient();
+  const { role } = useUserRole();
+
+  if (clients.length === 0 && role === "super_admin") {
+    return (
+      <div className="mx-auto max-w-7xl px-6 py-10">
+        <div className="mb-8">
+          <h1 className="font-display text-3xl font-bold tracking-tight">Dashboard</h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Config-driven widgets for admins and local admins.
+          </p>
+        </div>
+        <div className="rounded-2xl border bg-card p-10 text-center shadow-fc-1">
+          <h2 className="font-display text-xl font-semibold">No clients yet</h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Create your first client to get started.
+          </p>
+          <Button className="mt-6" disabled>
+            Create client
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <StubShell
       title="Dashboard"
