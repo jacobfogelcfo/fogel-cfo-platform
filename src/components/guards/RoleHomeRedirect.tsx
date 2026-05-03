@@ -18,7 +18,6 @@ export function RoleHomeRedirect() {
     return <div className="flex min-h-screen items-center justify-center text-muted-foreground">Loading…</div>;
   }
 
-  if (clients.length === 0) return <Navigate to="/no-access" replace />;
   if (!role) return <Navigate to="/no-access" replace />;
 
   switch (role) {
