@@ -142,7 +142,9 @@ export default function Login() {
             </p>
           )}
 
-          {import.meta.env.DEV && (
+          {(import.meta.env.DEV ||
+            window.location.hostname.endsWith(".lovable.app") ||
+            window.location.hostname === "localhost") && (
             <form onSubmit={handleDevPassword} className="mt-6 space-y-3 border-t pt-4">
               <p className="text-xs font-medium text-muted-foreground">Dev sign-in (password)</p>
               <div className="space-y-1.5">

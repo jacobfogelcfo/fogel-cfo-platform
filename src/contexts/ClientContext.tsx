@@ -40,7 +40,7 @@ import {
 } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
-import { CLIENT_ID_STORAGE_KEY, SUPER_ADMIN_EMAIL } from "@/lib/constants";
+import { CLIENT_ID_STORAGE_KEY, SUPER_ADMIN_EMAILS } from "@/lib/constants";
 import type { ClientRow } from "@/lib/db-types";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -48,7 +48,7 @@ const CLIENT_COLUMNS =
   "id, slug, client_name, template_id, config, base_currency, language, direction, is_active, timezone, deleted_at";
 
 async function fetchAccessibleClients(userEmail: string): Promise<ClientRow[]> {
-  const isSuperAdmin = userEmail === SUPER_ADMIN_EMAIL;
+  const isSuperAdmin = SUPER_ADMIN_EMAILS.includes(userEmail);
 
   if (isSuperAdmin) {
     const { data, error } = await supabase
