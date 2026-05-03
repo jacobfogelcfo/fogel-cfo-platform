@@ -28,7 +28,7 @@
 import { createContext, useContext, useMemo, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
-import { SUPER_ADMIN_EMAIL } from "@/lib/constants";
+import { SUPER_ADMIN_EMAILS } from "@/lib/constants";
 import type { ResolvedRole } from "@/lib/db-types";
 import { useAuth } from "@/contexts/AuthContext";
 import { useClient } from "@/contexts/ClientContext";
@@ -39,7 +39,7 @@ type RoleResolution = {
 };
 
 async function resolveRole(userEmail: string, clientId: string): Promise<RoleResolution> {
-  if (userEmail === SUPER_ADMIN_EMAIL) {
+  if (SUPER_ADMIN_EMAILS.includes(userEmail)) {
     return { role: "super_admin", permissions: null };
   }
 
@@ -89,7 +89,7 @@ export function UserRoleProvider({ children }: { children: ReactNode }) {
   const { currentClientId } = useClient();
   const userEmail = user?.email ?? null;
 
-  const isSuperAdmin = userEmail === SUPER_ADMIN_EMAIL;
+  const isSuperAdmin = !!userEmail && SUPER_ADMIN_EMAILS.includes(userEmail);
   // Super admins resolve regardless of currentClientId; everyone else needs one.
   const enabled = !!userEmail && (isSuperAdmin || !!currentClientId);
 
