@@ -13,6 +13,21 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
+  const [devPassword, setDevPassword] = useState("");
+  const [devSubmitting, setDevSubmitting] = useState(false);
+
+  async function handleDevPassword(e: React.FormEvent) {
+    e.preventDefault();
+    const { supabase } = await import("@/lib/supabase");
+    setDevSubmitting(true);
+    const { error } = await supabase.auth.signInWithPassword({
+      email: email.trim(),
+      password: devPassword,
+    });
+    setDevSubmitting(false);
+    if (error) toast.error(error.message);
+    else toast.success("Signed in.");
+  }
 
   useEffect(() => {
     document.title = "Sign in · Fogel CFO";
